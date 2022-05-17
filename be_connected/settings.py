@@ -99,7 +99,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Be_connected',
         'USER': 'postgres',
-        'PASSWORD':'admin',
+        'PASSWORD':'beconnecteddatabase',
         'HOST':'beconnected.coy2xbfytt2o.ap-south-1.rds.amazonaws.com'
         
     }

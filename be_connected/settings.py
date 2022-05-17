@@ -97,10 +97,10 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'beconnected',
-        'USER': 'beconnected',
-        'PASSWORD':'beconnecteddatabase',
-        'HOST':'beconnected.coy2xbfytt2o.ap-south-1.rds.amazonaws.com'
+        'NAME': 'postgresdatabase',
+        'USER': 'postgres',
+        'PASSWORD':'mypassword',
+        'HOST':'postgresdatabase.coy2xbfytt2o.ap-south-1.rds.amazonaws.com'
         
     }
 }

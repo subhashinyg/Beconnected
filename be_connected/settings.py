@@ -100,7 +100,7 @@ DATABASES = {
         'NAME': 'Be_connected',
         'USER': 'postgres',
         'PASSWORD':'admin',
-        'HOST':'localhost'
+        'HOST':'beconnected.coy2xbfytt2o.ap-south-1.rds.amazonaws.com'
         
     }
 }

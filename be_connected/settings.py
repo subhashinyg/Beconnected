@@ -97,10 +97,10 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'beconnecteddatabase',
-        'USER': 'admin',
-        'PASSWORD':'mysqladmin',
-        'HOST':'beconnecteddatabase.coy2xbfytt2o.ap-south-1.rds.amazonaws.com'
+        'NAME': 'bconnected',
+        'USER': 'root',
+        'PASSWORD':'',
+        'HOST':'localhost'
         
     }
 }

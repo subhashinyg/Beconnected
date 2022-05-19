@@ -1,3 +1,4 @@
+from operator import sub
 from django.shortcuts import render
 from category_app.models import *
 from rest_framework.response import Response
@@ -17,8 +18,16 @@ class CategoryView(APIView):
     def get(self, request):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data) 
-
+        product= serializer.data
+        d={}
+        li=[]
+        try:
+            for i in range(len(product)):
+                li.append({"id":product[i]['id'],"category_name":product[i]['category_name']})
+            d['categories']=li
+            return Response(d) 
+        except:
+            return Response({"Error":"Something Wrong"})
     def post(self, request):
         serializer = CategorySerializer(data=request.data) 
         if serializer.is_valid():
@@ -63,8 +72,13 @@ class SubCategoryView(APIView):
     def get(self, request):
         subcategory = SubCategory.objects.all()
         serializer = SubCategorycreateSerializer(subcategory, many=True)
-        print(serializer.data)
-        return Response(serializer.data) 
+        subproduct = serializer.data
+        d={}
+        li=[]
+        for i in range(len(subproduct)):
+            li.append({"categories":subproduct[i]["categories"],"subcategory_name":subproduct[i]["subcategory_name"]})
+        d["subcategory"]=li
+        return Response(d) 
         
     def post(self, request):
         

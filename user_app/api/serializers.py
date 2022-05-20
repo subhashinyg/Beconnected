@@ -43,4 +43,4 @@ class AccountRegistrationSerializer(serializers.ModelSerializer):
 class UserProfileAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['id','email','phone']
+        fields = ['id','email','phone','full_name']

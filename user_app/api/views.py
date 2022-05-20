@@ -11,9 +11,11 @@ from rest_framework import generics
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from user_app.api.serializers import AccountRegistrationSerializer
+from user_app.api.serializers import AccountRegistrationSerializer, UserProfileAPISerializer
 
 from rest_framework.views import APIView
+
+from user_app.models import Account
 
 
 
@@ -45,3 +47,9 @@ def user_registration_view(request):
         
         
         return Response(data)
+
+class UserProfileAPI(APIView):
+   def get(self, request):
+        shops = Account.objects.all()
+        serializer = UserProfileAPISerializer(shops, many=True)
+        return Response(serializer.data) 

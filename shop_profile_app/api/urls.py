@@ -8,6 +8,4 @@ urlpatterns = [
     path('shop_profile_edit/<pk>/',views.shop_profile_edit.as_view(),name='profile_edit'),
     # path('logout/',views.logout_view, name='logout'),
     
-    
-
 ]

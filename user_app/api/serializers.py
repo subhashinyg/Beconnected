@@ -1,3 +1,5 @@
+from dataclasses import fields
+from pyexpat import model
 from user_app.models import Account
 from rest_framework import serializers
 
@@ -37,3 +39,8 @@ class AccountRegistrationSerializer(serializers.ModelSerializer):
         account.save()
 
         return account
+
+class UserProfileAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = "__all__"

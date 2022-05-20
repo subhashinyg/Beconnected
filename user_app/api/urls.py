@@ -7,6 +7,8 @@ from user_app.api import views
 urlpatterns = [
     path('login/', TokenObtainPairView.as_view(), name='login'),
     path('register/',views.user_registration_view,name='register'),
+    path('get-profile', views.UserProfileAPI.as_view(), name='profile')
+
     #path('logout/',views.logout_view, name='logout'),
     
     

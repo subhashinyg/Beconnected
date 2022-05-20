@@ -96,9 +96,14 @@ class LocationView(APIView):
     def get(self, request):
         location = Locations.objects.all()
         serializer = LocationsSerializer(location, many=True)
-        print(serializer.data)
-        return Response(serializer.data)
-        
+        #print(serializer.data)
+        locationsList = serializer.data
+        li=[]
+        d={}
+        for i in range(len(locationsList)):
+            li.append({"subcategories":locationsList[i]["subcategories"],"location_name":locationsList[i]["location_name"]})
+        d["location"]=li
+        return Response(d)
     def post(self, request):
         serializer = LocationsSerializer(data=request.data) 
         if serializer.is_valid():

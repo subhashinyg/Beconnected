@@ -50,6 +50,13 @@ def user_registration_view(request):
 
 class UserProfileAPI(APIView):
    def get(self, request):
-        shops = Account.objects.all()
-        serializer = UserProfileAPISerializer(shops, many=True)
-        return Response(serializer.data) 
+        users = Account.objects.all()
+        serializer = UserProfileAPISerializer(users, many=True)
+        userdata=serializer.data
+        li=[]
+        d={}
+        for i in range(len(userdata)):
+            li.append({"email":userdata[i]["email"],"phone":userdata[i]["phone"]})
+        d["users"]=li
+        return Response(d)
+         

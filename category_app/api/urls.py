@@ -10,6 +10,7 @@ urlpatterns = [
     path('locations/',views.LocationView.as_view(),name='location'),
     path('getSubcategory/<pk>/',views.Subcategory, name='get_subcategory'),
     path('business-services', views.BusinessServicesView.as_view()),
+    #path('shop_description', views.ShopDescriptionView.as_view(), name='shop_description')
     #path('logout/',views.logout_view, name='logout'),
     
 

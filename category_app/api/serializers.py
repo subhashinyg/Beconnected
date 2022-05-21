@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from stripe import Source
 from category_app.models import *
 
 
@@ -42,9 +43,11 @@ class ListingCategorySerializer(serializers.ModelSerializer):
         fields = ['subcategories']
 
 class BusinessServicesList(serializers.ModelSerializer):
-    serviceId = serializers.IntegerField(source='id')
+    serviceId = serializers.IntegerField(source='location')
+    category = serializers.CharField(source='category')
+    subcategory = serializers.CharField(source='subcategory')
     phoneNo = serializers.CharField(source='phone_no')
     landlineNo = serializers.CharField(source='landline_no')
     class Meta:
         model = BusinessServices
-        fields = ('serviceId', 'name', 'description', 'address', 'phoneNo', 'landlineNo')
+        fields = ('serviceId', 'name', 'description', 'address', 'phoneNo', 'landlineNo','subcategory','category')

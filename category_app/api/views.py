@@ -125,9 +125,11 @@ def Subcategory(request,pk):
 class BusinessServicesView(APIView):
     def post(self, request):
         try:
-            location_id = request.data['locationId']
+            # location_id = request.data['locationId']
+            # Category_id = request.data['categoryId']
+            # Subcategory_id = request.data['subcategoryId']
             business_services = BusinessServicesList(
-                BusinessServices.objects.filter(location=location_id), many=True
+                BusinessServices.objects.all(), many=True
             ).data
             return Response({
                 'hasError': False,

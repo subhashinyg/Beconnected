@@ -142,3 +142,21 @@ class BusinessServicesView(APIView):
                 'message': f'Failed: {str(e)}',
                 'response': None
             }, status=status.HTTP_200_OK)
+
+class ShopDescriptionView(APIView):
+    def post(self, request):
+        try:
+            shop_descriptions = BusinessServicesList(
+                BusinessServices.objects.all(),many=True
+            ).data
+            return Response({
+                'hasError': False,
+                'message': 'Success',
+                'response': shop_descriptions
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({
+                'hasError': True,
+                'message': f'Failed: {str(e)}',
+                'response': None
+            }, status=status.HTTP_200_OK)

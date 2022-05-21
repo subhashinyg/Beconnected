@@ -27,7 +27,7 @@ class CategoryView(APIView):
         li=[]
         try:
             for i in range(len(product)):
-                li.append({"id":product[i]['id'],"category_name":product[i]['category_name']})
+                li.append({"id":product[i]['id'],"category_name":product[i]['category_name'],"id":product[i]['id']})
             d['categories']=li
             return Response(d) 
         except:
@@ -80,7 +80,7 @@ class SubCategoryView(APIView):
         d={}
         li=[]
         for i in range(len(subproduct)):
-            li.append({"categories":subproduct[i]["categories"],"subcategory_name":subproduct[i]["subcategory_name"]})
+            li.append({"categories":subproduct[i]["categories"],"subcategory_name":subproduct[i]["subcategory_name"],"subcategoryId":subproduct[i]["id"]})
         d["subcategory"]=li
         return Response(d) 
         
@@ -105,7 +105,7 @@ class LocationView(APIView):
         li=[]
         d={}
         for i in range(len(locationsList)):
-            li.append({"subcategories":locationsList[i]["subcategories"],"location_name":locationsList[i]["location_name"]})
+            li.append({"subcategories":locationsList[i]["subcategories"],"location_name":locationsList[i]["location_name"],"location_Id":locationsList[i]["id"]})
         d["location"]=li
         return Response(d)
     def post(self, request):
@@ -131,6 +131,7 @@ class BusinessServicesView(APIView):
             business_services = BusinessServicesList(
                 BusinessServices.objects.all(), many=True
             ).data
+            print(business_services)
             return Response({
                 'hasError': False,
                 'message': 'Success',

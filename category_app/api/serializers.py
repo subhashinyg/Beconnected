@@ -48,6 +48,7 @@ class BusinessServicesList(serializers.ModelSerializer):
     subcategory = serializers.CharField(source='subcategory.subcategory_name')
     phoneNo = serializers.CharField(source='phone_no')
     landlineNo = serializers.CharField(source='landline_no')
+    locationId = serializers.IntegerField(source='location.id')
     class Meta:
         model = BusinessServices
-        fields = ('serviceId', 'name', 'description', 'address', 'phoneNo', 'landlineNo', 'category', 'subcategory')
+        fields = ('serviceId', 'name', 'description', 'address', 'phoneNo', 'landlineNo', 'category', 'subcategory','locationId')

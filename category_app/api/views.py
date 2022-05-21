@@ -144,19 +144,30 @@ class BusinessServicesView(APIView):
             }, status=status.HTTP_200_OK)
 
 class ShopDescriptionView(APIView):
-    def post(self, request):
+    def get(self,request, *args, **kwargs):
         try:
-            shop_descriptions = BusinessServicesList(
-                BusinessServices.objects.all(),many=True
-            ).data
-            return Response({
-                'hasError': False,
-                'message': 'Success',
-                'response': shop_descriptions
-            }, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({
-                'hasError': True,
-                'message': f'Failed: {str(e)}',
-                'response': None
-            }, status=status.HTTP_200_OK)
+            data=BusinessServices.objects.get(id=request.data['id'])
+            #print(data,"///////////////////////////////////////////")
+            print(data.name,"//////////////////////////////")
+            d={"detail":[{"name":data.name, "description":data.description, "address":data.address,"phone":data.phone_no,"landline":data.landline_no}]}
+            # serializ= BusinessServicesList(data= data)
+            # serializ.is_valid()
+            return Response(d)
+        except:
+            return Response({"error":"not found"})
+# class ShopDescriptionView(APIView):
+#     def get(self, request):
+#         try:
+#             shop_descriptions = BusinessServicesList(data=BusinessServices.objects.filter(id=request.data['id'])
+#             )
+#             return Response({
+#                 'hasError': False,
+#                 'message': 'Success',
+#                 'response': shop_descriptions
+#             }, status=status.HTTP_200_OK)
+#         except Exception as e:
+#             return Response({
+#                 'hasError': True,
+#                 'message': f'Failed: {str(e)}',
+#                 'response': None
+#             }, status=status.HTTP_200_OK)

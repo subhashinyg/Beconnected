@@ -1,3 +1,4 @@
+from distutils.log import error
 from operator import sub
 from django.shortcuts import render
 from category_app.models import *
@@ -10,6 +11,7 @@ from rest_framework.views import APIView
 from django.db.models import Count
 from django.core import serializers
 from rest_framework import viewsets
+import json
 
 # Create your views here.
 from django.contrib.auth.models import AbstractUser
@@ -74,15 +76,15 @@ class Categoryupdate(APIView):
 
 class SubCategoryView(APIView):
     def get(self, request):
-        subcategory = SubCategory.objects.all()
-        serializer = SubCategorycreateSerializer(subcategory, many=True)
-        subproduct = serializer.data
-        d={}
-        li=[]
-        for i in range(len(subproduct)):
-            li.append({"categories":subproduct[i]["categories"],"subcategory_name":subproduct[i]["subcategory_name"],"subcategoryId":subproduct[i]["id"]})
-        d["subcategory"]=li
-        return Response(d) 
+        try:
+            catId=SubCategory.objects.filter(categories=request.data['categoryId'])
+
+            serializer = SubCategorycreateSerializer(catId, many=True)
+       
+            return Response({"subcategories":serializer.data})
+        except Exception as e:
+            return Response({"subcategories":None})
+
         
     def post(self, request):
         
@@ -98,16 +100,21 @@ class SubCategoryView(APIView):
 
 class LocationView(APIView):
     def get(self, request):
-        location = Locations.objects.all()
-        serializer = LocationsSerializer(location, many=True)
-        #print(serializer.data)
-        locationsList = serializer.data
-        li=[]
-        d={}
-        for i in range(len(locationsList)):
-            li.append({"subcategories":locationsList[i]["subcategories"],"location_name":locationsList[i]["location_name"],"location_Id":locationsList[i]["id"]})
-        d["location"]=li
-        return Response(d)
+        try:
+            catId=Locations.objects.filter(subcategories=request.data['SubCategoryId'])
+            print(catId)
+
+            serializer = LocationsSerializer(catId, many=True)
+       
+            return Response({"subcategoryLocations":serializer.data})
+        except Exception as e:
+            return Response({"subcategoryLocations":None})
+        # subcategoryId = request.data['subcategoryId']
+        # location = Locations.objects.all()
+        # serializer = LocationsSerializer(location, many=True)
+        # #print(serializer.data)
+        # locationsList = serializer.data
+        # return Response({"subcategories":locationsList})
     def post(self, request):
         serializer = LocationsSerializer(data=request.data) 
         if serializer.is_valid():
@@ -123,37 +130,51 @@ def Subcategory(request,pk):
     return Response(serializer.data)
 
 class BusinessServicesView(APIView):
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         try:
-            # location_id = request.data['locationId']
-            # Category_id = request.data['categoryId']
-            # Subcategory_id = request.data['subcategoryId']
-            business_services = BusinessServicesList(
-                BusinessServices.objects.all(), many=True
-            ).data
-            print(business_services)
-            return Response({
-                'hasError': False,
-                'message': 'Success',
-                'response': business_services
-            }, status=status.HTTP_200_OK)
+            serializer= BusinessServiceAddSerializer(data=request.data)
+            print(serializer,'////////////////////////////////')
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response({"Business":serializer.data})
         except Exception as e:
-            return Response({
-                'hasError': True,
-                'message': f'Failed: {str(e)}',
-                'response': None
-            }, status=status.HTTP_200_OK)
+            return Response({"Business":None})
+    def get(self, request):
+        location= request.data['locationid']
+        category= request.data['categoryid']
+        sub_category= request.data['subcategoryid']
+
+        qs= BusinessServices.objects.filter(category=category, subcategory=sub_category, location=location)
+        serial= BusinessServiceAddSerializer(data=qs, many= True)
+        serial.is_valid()
+
+        return Response({"Response":serial.data})
+        
+
+            # return Response({
+            #     'hasError': False,
+            #     'message': 'Success',
+            #     'response': serializer
+            # }, status=status.HTTP_200_OK)
+        #except Exception as e:
+            # return Response({
+            #     'hasError': True,
+            #     'message': f'Failed: {str(e)}',
+            #     'response': None
+            # }, status=status.HTTP_200_OK)
 
 class ShopDescriptionView(APIView):
+    def post(self,request):
+        pass
     def get(self,request, *args, **kwargs):
         try:
             data=BusinessServices.objects.get(id=request.data['id'])
             #print(data,"///////////////////////////////////////////")
             print(data.name,"//////////////////////////////")
-            d={"detail":[{"name":data.name, "description":data.description, "address":data.address,"phone":data.phone_no,"landline":data.landline_no}]}
+           
             # serializ= BusinessServicesList(data= data)
             # serializ.is_valid()
-            return Response(d)
+            return Response({"details":data})
         except:
             return Response({"error":"not found"})
 # class ShopDescriptionView(APIView):

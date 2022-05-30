@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.db import models
 
 class Category(models.Model):
@@ -26,6 +27,7 @@ class SubCategory(models.Model):
 
 class Locations(models.Model):
     subcategories = models.ForeignKey(SubCategory,on_delete=models.CASCADE,related_name='subcategorylocation')
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
     location_name = models.CharField(max_length=100)
     active = models.BooleanField(default=True)
     createdDate = models.DateTimeField(auto_now_add=True)

@@ -27,10 +27,11 @@ class SubCategorySerializer(serializers.ModelSerializer):
 
 class LocationsSerializer(serializers.ModelSerializer):
     subcategories = SubCategorySerializer
+    category = CategorySerializer
 
     class Meta:
         model = Locations
-        fields = ['id','location_name','subcategories']               
+        fields = ['id','location_name','subcategories','category']               
 
 
 

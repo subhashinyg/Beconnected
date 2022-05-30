@@ -96,7 +96,7 @@ class SubCategoryView(APIView):
 class LocationView(APIView):
     def get(self, request):
         try:
-            catId=Locations.objects.filter(subcategories=request.data['SubCategoryId'])
+            catId=Locations.objects.filter(subcategories=request.data['SubCategoryId'],category=request.data['CategoryId'])
             print(catId)
 
             serializer = LocationsSerializer(catId, many=True)

@@ -50,8 +50,9 @@ def user_registration_view(request):
 
 class UserProfileAPI(APIView):
    def get(self, request):
-        users=request.user
+       pass
+        #users=request.user
        # print(users.email)
         #results={"users":users}
-        return Response(users)
+       # return Response(users)
          

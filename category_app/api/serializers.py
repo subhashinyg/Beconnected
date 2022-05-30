@@ -44,8 +44,8 @@ class ListingCategorySerializer(serializers.ModelSerializer):
 
 class BusinessServicesList(serializers.ModelSerializer):
     serviceId = serializers.IntegerField(source='id')
-    category = serializers.CharField(source='category.category_name')
-    subcategory = serializers.CharField(source='subcategory.subcategory_name')
+    category = serializers.CharField(source='category.category_name',read_only=True)
+    subcategory = serializers.CharField(source='subcategory.subcategory_name',read_only=True)
     phoneNo = serializers.CharField(source='phone_no')
     landlineNo = serializers.CharField(source='landline_no')
     locationId = serializers.IntegerField(source='location.id')

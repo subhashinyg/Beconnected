@@ -25,15 +25,10 @@ class CategoryView(APIView):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
         product= serializer.data
-        d={}
-        li=[]
-        try:
-            for i in range(len(product)):
-                li.append({"id":product[i]['id'],"category_name":product[i]['category_name'],"id":product[i]['id']})
-            d['categories']=li
-            return Response(d) 
-        except:
-            return Response({"Error":"Something Wrong"})
+        
+        return Response({"Products":product}) 
+        #except:
+        #    return Response({"Error":"Something Wrong"})
     def post(self, request):
         serializer = CategorySerializer(data=request.data) 
         if serializer.is_valid():
@@ -130,15 +125,15 @@ def Subcategory(request,pk):
     return Response(serializer.data)
 
 class BusinessServicesView(APIView):
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         #try:
-        serializer= BusinessServiceAddSerializer(data=request.data)
+        serializer= BusinessServicesList(data=request.data)
         print(serializer,'////////////////////////////////')
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({"Business":serializer.data})
-       # except Exception as e:
-        #return Response({"Business":None})
+        #except Exception as e:
+            #return Response({"Business":None})
     def get(self, request):
         location= request.data['locationid']
         category= request.data['categoryid']

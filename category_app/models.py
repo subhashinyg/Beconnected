@@ -36,6 +36,34 @@ class Locations(models.Model):
     def __str__(self):
         return self.location_name
 
+# class BusinessServices(models.Model):
+#     location = models.ForeignKey(Locations, on_delete=models.CASCADE)
+#     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, default=1)
+#     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=62)
+#     description = models.CharField(max_length=255)
+#     address = models.TextField()
+#     phone_no = models.CharField(max_length=16)
+#     landline_no = models.CharField(max_length=16)
+#     website = models.CharField(max_length=100)
+#     facebook = models.CharField(max_length=16)
+#     instagram = models.CharField(max_length=16)
+#     twitter = models.CharField(max_length=16)
+#     linkedin = models.CharField(max_length=16)
+#     watsapp = models.CharField(max_length=16)
+#     landphone = models.CharField(max_length=16)
+#     fax = models.CharField(max_length=16)
+#     googlemap = models.CharField(max_length=16)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+    
+#     class Meta:
+#         db_table = 'business_services'
+    #     verbose_name = 'Business Service'
+    #     verbose_name_plural = 'Business Services'
+
+
+
 class BusinessServices(models.Model):
     location = models.ForeignKey(Locations, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, default=1)
@@ -56,11 +84,6 @@ class BusinessServices(models.Model):
     googlemap = models.CharField(max_length=16)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
-    # class Meta:
-    #     db_table = 'business_services'
-    #     verbose_name = 'Business Service'
-    #     verbose_name_plural = 'Business Services'
 
     def __str__(self):
         return self.name

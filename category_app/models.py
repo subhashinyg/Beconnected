@@ -57,10 +57,10 @@ class BusinessServices(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-    class Meta:
-        db_table = 'business_services'
-        verbose_name = 'Business Service'
-        verbose_name_plural = 'Business Services'
+    # class Meta:
+    #     db_table = 'business_services'
+    #     verbose_name = 'Business Service'
+    #     verbose_name_plural = 'Business Services'
 
     def __str__(self):
         return self.name

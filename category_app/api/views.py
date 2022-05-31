@@ -127,7 +127,7 @@ def Subcategory(request,pk):
 class BusinessServicesView(APIView):
     def post(self, request):
         #try:
-        serializer= BusinessServicesList(data=request.data)
+        serializer= BusinessServiceAddSerializer(data=request.data)
         print(serializer,'////////////////////////////////')
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -141,7 +141,7 @@ class BusinessServicesView(APIView):
 
         qs= BusinessServices.objects.filter(category=category, subcategory=sub_category, location=location)
         serial= BusinessServiceAddSerializer(data=qs, many= True)
-        serial.is_valid(raise_exception=True)
+        serial.is_valid()
 
         return Response({"Response":serial.data})
         

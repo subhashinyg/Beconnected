@@ -55,5 +55,5 @@ class UserProfileAPI(APIView):
         users=request.user
         print(users.email)
         #results={"users":users}
-        return Response({"email":users.email,"phone":users.phone})
+        return Response({"User":{"Username":users.full_name,"email":users.email,"phone":users.phone}})
          

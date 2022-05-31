@@ -16,6 +16,7 @@ from user_app.api.serializers import AccountRegistrationSerializer, UserProfileA
 from rest_framework.views import APIView
 
 from user_app.models import Account
+import json
 
 
 
@@ -50,8 +51,9 @@ def user_registration_view(request):
 
 class UserProfileAPI(APIView):
    def get(self, request):
-       #user = UserProfileAPISerializer(data=request.data) 
-       users=request.Account
-       results={"users":users}
-       return Response(users)
+
+        users=request.user
+        print(users.email)
+        #results={"users":users}
+        return Response({"email":users.email,"phone":users.phone})
          

@@ -135,11 +135,10 @@ class BusinessServicesView(APIView):
         #except Exception as e:
             #return Response({"Business":None})
     def get(self, request):
-        location= request.data['locationid']
         category= request.data['categoryid']
-        sub_category= request.data['subcategoryid']
-
-        qs= BusinessServices.objects.filter(category=category, subcategory=sub_category, location=location)
+        #sub_category= request.data['subcategoryid']
+        location= request.data['locationid']
+        qs= BusinessServices.objects.filter(location=location,category=category)
         serial= BusinessServiceAddSerializer(data=qs, many= True)
         serial.is_valid()
 
@@ -159,32 +158,29 @@ class BusinessServicesView(APIView):
             # }, status=status.HTTP_200_OK)
 
 class ShopDescriptionView(APIView):
-    def post(self,request):
-        pass
     def get(self,request, *args, **kwargs):
         try:
             data=BusinessServices.objects.get(id=request.data['id'])
-            #print(data,"///////////////////////////////////////////")
-            print(data.name,"//////////////////////////////")
+            print(data,'/////////////////')
            
             # serializ= BusinessServicesList(data= data)
             # serializ.is_valid()
             return Response({"details":data})
         except:
             return Response({"error":"not found"})
-# class ShopDescriptionView(APIView):
-#     def get(self, request):
-#         try:
-#             shop_descriptions = BusinessServicesList(data=BusinessServices.objects.filter(id=request.data['id'])
-#             )
-#             return Response({
-#                 'hasError': False,
-#                 'message': 'Success',
-#                 'response': shop_descriptions
-#             }, status=status.HTTP_200_OK)
-#         except Exception as e:
-#             return Response({
-#                 'hasError': True,
-#                 'message': f'Failed: {str(e)}',
-#                 'response': None
-#             }, status=status.HTTP_200_OK)
+class ShopDescriptionView(APIView):
+    def get(self, request):
+        try:
+            shop_descriptions = BusinessServicesList(data=BusinessServices.objects.filter(id=request.data['id'])
+            )
+            return Response({
+                'hasError': False,
+                'message': 'Success',
+                'response': shop_descriptions
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({
+                'hasError': True,
+                'message': f'Failed: {str(e)}',
+                'response': None
+            }, status=status.HTTP_200_OK)

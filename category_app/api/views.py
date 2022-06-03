@@ -140,17 +140,17 @@ class BusinessServicesView(APIView):
         return Response({"Response":serial.data})
         
 
-            # return Response({
-            #     'hasError': False,
-            #     'message': 'Success',
-            #     'response': serializer
-            # }, status=status.HTTP_200_OK)
-        #except Exception as e:
-            # return Response({
-            #     'hasError': True,
-            #     'message': f'Failed: {str(e)}',
-            #     'response': None
-            # }, status=status.HTTP_200_OK)
+        #     return Response({
+        #         'hasError': False,
+        #         'message': 'Success',
+        #         'response': serializer
+        #     }, status=status.HTTP_200_OK)
+        # except Exception as e:
+        #     return Response({
+        #         'hasError': True,
+        #         'message': f'Failed: {str(e)}',
+        #         'response': None
+        #     }, status=status.HTTP_200_OK)
 
 class ShopDescriptionView(APIView):
     def get(self,request, *args, **kwargs):

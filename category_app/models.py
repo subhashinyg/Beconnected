@@ -68,7 +68,7 @@ class Locations(models.Model):
 
 class BusinessServices(models.Model):
     location = models.ForeignKey(Locations, on_delete=models.CASCADE)
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, default=1)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=62)
     description = models.CharField(max_length=255)

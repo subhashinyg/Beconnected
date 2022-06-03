@@ -58,5 +58,5 @@ class BusinessServicesList(serializers.ModelSerializer):
 class BusinessServiceAddSerializer(serializers. ModelSerializer):
     class Meta:
         model= BusinessServices
-        fields=  ['subcategory','category', 'location','name', 'description','address','website','facebook','instagram','twitter','linkedin','watsapp','fax','googlemap']
+        fields=  ['category', 'location', 'subcategory', 'name', 'description','address','website','facebook','instagram','twitter','linkedin','watsapp','fax','googlemap']
     

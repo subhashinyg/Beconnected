@@ -89,3 +89,6 @@ class BusinessServices(models.Model):
 
     def __str__(self):
         return self.name
+
+class PrivacyPolicy(models.Model):
+    privacy = models.CharField(max_length=500)

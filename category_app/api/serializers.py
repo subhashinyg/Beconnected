@@ -1,3 +1,4 @@
+from pyexpat import model
 from rest_framework import serializers
 from stripe import Source
 from category_app.models import *
@@ -60,3 +61,7 @@ class BusinessServiceAddSerializer(serializers. ModelSerializer):
         model= BusinessServices
         fields=  ['category', 'location', 'subcategory', 'name', 'description','address','website','facebook','instagram','twitter','linkedin','watsapp','fax','googlemap']
     
+class PrivacyPolicySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PrivacyPolicy
+        fields = '__all__'

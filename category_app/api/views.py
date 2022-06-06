@@ -184,3 +184,10 @@ class ShopDescriptionView(APIView):
                 'message': f'Failed: {str(e)}',
                 'response': None
             }, status=status.HTTP_200_OK)
+
+
+class PrivacyView(APIView):
+    def get(self, request):
+        Privacy_policy = PrivacyPolicy.objects.all()
+        serial = PrivacyPolicySerializer(Privacy_policy, many = True)
+        return Response({"policy":serial.data}) 

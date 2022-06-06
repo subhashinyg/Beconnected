@@ -140,6 +140,7 @@ class BusinessServicesView(APIView):
         sub_category= request.data['subcategoryid']
 
         qs= BusinessServices.objects.filter(category=category, subcategory=sub_category, location=location)
+        # qs= BusinessServices.objects.filter(location__subcategory__category__id=category, location__subcategory__id=sub_category, location=location)
         serial = BusinessServiceAddSerializer(qs, many= True)
         return Response({"Response":serial.data})
         

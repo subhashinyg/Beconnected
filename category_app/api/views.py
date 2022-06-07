@@ -189,5 +189,10 @@ class ShopDescriptionView(APIView):
 class PrivacyView(APIView):
     def get(self, request):
         Privacy_policy = PrivacyPolicy.objects.all()
+        print(Privacy_policy,'''''''''''''''''''''''''''''''''''''''''''')
         serial = PrivacyPolicySerializer(Privacy_policy, many = True)
         return Response({"policy":serial.data}) 
+
+
+def policy(request):
+    return render(request, 'policy.html')

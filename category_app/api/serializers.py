@@ -59,7 +59,7 @@ class BusinessServicesList(serializers.ModelSerializer):
 class BusinessServiceAddSerializer(serializers. ModelSerializer):
     class Meta:
         model= BusinessServices
-        fields=  ['category', 'location', 'subcategory', 'name', 'description','address','website','facebook','instagram','twitter','linkedin','watsapp','fax','googlemap']
+        fields=  '__all__'
     
 class PrivacyPolicySerializer(serializers.ModelSerializer):
     class Meta:

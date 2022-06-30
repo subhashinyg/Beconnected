@@ -135,14 +135,18 @@ class BusinessServicesView(APIView):
         #except Exception as e:
             #return Response({"Business":None})
     def get(self, request):
-        location= request.data['locationid']
-        category= request.data['categoryid']
-        sub_category= request.data['subcategoryid']
+        try:
+            location_Id= request.data['locationid']
+            category= request.data['categoryid']
+            sub_category= request.data['subcategoryid']
+            print(location_Id,category,sub_category)
+            qs= BusinessServices.objects.filter(category=category, subcategory=sub_category, location=location_Id)
+            # qs= BusinessServices.objects.filter(location__subcategory__category__id=category, location__subcategory__id=sub_category, location=location)
+            serial = BusinessServiceAddSerializer(qs, many= True)
+            return Response({"Response":serial.data})
+        except Exception as e:
+            return Response(e)
 
-        qs= BusinessServices.objects.filter(category=category, subcategory=sub_category, location=location)
-        # qs= BusinessServices.objects.filter(location__subcategory__category__id=category, location__subcategory__id=sub_category, location=location)
-        serial = BusinessServiceAddSerializer(qs, many= True)
-        return Response({"Response":serial.data})
         
 
         #     return Response({

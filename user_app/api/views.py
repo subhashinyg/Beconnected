@@ -57,3 +57,13 @@ class UserProfileAPI(APIView):
         #results={"users":users}
         return Response({"User":{"Username":users.full_name,"email":users.email,"phone":users.phone}})
          
+
+from django.contrib.auth.hashers import make_password
+#browser view
+def register_page(request):
+    if request.method =="POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = make_password(request.POST.get('password'))
+
+#obj = Account(username=username)

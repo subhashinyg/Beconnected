@@ -1,0 +1,7 @@
+
+<option value="">--Select location--</option>
+{% for data in location %}                                        
+<option value="{{ data.id }}">{{ data.location_name }}</option> 
+{% empty %}
+<option value="" disabled>{{ "No data available" }}</option> 
+{% endfor %}

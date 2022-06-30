@@ -1,0 +1,133 @@
+{% extends "common/base.html" %}
+{% load static %}
+{% block page_content %}
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        {% include "common/side_bar.html" %}
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                {% include "common/top_bar.html" %}
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!--For displaying alert message-->
+                    {% if messages %}
+                        {% for msg in messages %}
+                        <div class="alert alert-{{ msg.tags }} alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{msg.message}}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    <!--alert message ends-->
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Sub category</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#districtModal">
+                            <i class="fas fa-plus-square text-white-50"></i>Add subcategory
+                        </a>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <!-- Begin Page Content -->
+                        <div class="container-fluid">
+
+                            <!-- DataTales Example -->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead 
+                                            <tr>
+                                                <th>Sub category</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           {% for data in sub_category %}
+                                            <tr>
+                                                <td>{{data.subcategory_name}}</td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-circle btn-sm edit-state" title="Edit"
+                                                        category ="{{data.subcategory_name}}"
+                                                    >
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <a href="/delete_subcategory/{{ data.id }}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-danger btn-circle btn-sm" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr> 
+                                            {% empty %}                                             
+                                            <tr>
+                                                <td colspan="2">No data available</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                <!-- /.container-fluid -->
+                    </div>
+
+            </div>
+            <!-- End of Main Content -->
+            <div class="modal fade" id="districtModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+                <div class="modal-dialog" role="form">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Sub category</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <form action="sub-cat" method="post" id="districtForm">
+                        {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="state_id">Select Category</label>
+                                            <select class="form-control" name="categories_id" id="categories_id" required>
+                                                <option value="" selected disabled>-select category-</option>
+                                                {% for data in category %}
+                                                <option value="{{ data.id }}">{{ data.category_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="district">Sub Category</label>
+                                            <input type="text" class="form-control" name="subcategory" id="subcategory" placeholder="Enter Sub category name" required>
+                                            <input type="hidden" name="sub_category" id="sub_category">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success btn-sm" id="btn-submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'common/footer.html' %}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    {% include 'common/footer_modal.html' %}
+</body>
+{% endblock %}

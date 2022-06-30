@@ -26,8 +26,8 @@ class SubCategory(models.Model):
 
 
 class Locations(models.Model):
-    subcategories = models.ForeignKey(SubCategory,on_delete=models.CASCADE,related_name='subcategorylocation')
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    subcategories = models.ForeignKey(SubCategory,on_delete=models.CASCADE,related_name='subcategorylocation')
     location_name = models.CharField(max_length=100)
     active = models.BooleanField(default=True)
     createdDate = models.DateTimeField(auto_now_add=True)
@@ -79,11 +79,10 @@ class BusinessServices(models.Model):
     facebook = models.CharField(max_length=16)
     instagram = models.CharField(max_length=16)
     twitter = models.CharField(max_length=16)
-    linkedin = models.CharField(max_length=16)
-    watsapp = models.CharField(max_length=16)
-    landphone = models.CharField(max_length=16)
-    fax = models.CharField(max_length=16)
-    googlemap = models.CharField(max_length=16)
+    linkedin = models.CharField(max_length=16, null=True)
+    watsapp = models.CharField(max_length=16, null=True)    
+    fax = models.CharField(max_length=16, null=True)
+    googlemap = models.CharField(max_length=16, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

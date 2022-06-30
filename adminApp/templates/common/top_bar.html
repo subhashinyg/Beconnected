@@ -1,0 +1,58 @@
+{% load static %}
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <h5 class="text-info">
+        <strong>{% if request.session.hospital_name %} {{ request.session.hospital_name }} {% endif %}</strong>
+    </h5>
+    {% if request.session.covid_status is not None %}
+    <div class="align-items-center bg-white col-sm-6">
+        <div class="d-flex flex-row flex-grow-1 flex-fill justify-content-center bg-info text-white">
+            <span class="d-flex align-items-center">Covid Test Result. Last Taken: {{ last_taken }}</span>
+        </div>
+        <marquee class="news-scroll" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+            <a href="#">
+                {% if request.session.covid_status == 1 %}
+                Your covid test result is <span class="text-info">In-Progress</span>
+                {% elif request.session.covid_status == 2 %}
+                Your covid test result is <span class="text-danger">Positive</span>
+                {% elif request.session.covid_status == 3 %}
+                Your covid test result is <span class="text-success">Negative</span>
+                {% else %}
+                No covid results available
+                {% endif %}
+            </a>
+        </marquee>
+    </div>
+    {% endif %}
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+        <div class="topbar-divider d-none d-sm-block"></div>
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ request.session.user_name }}</span>
+                <img class="img-profile rounded-circle"
+                    src="{% static 'img/undraw_profile.svg' %}">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+
+    </ul>
+
+</nav>
+<!-- End of Topbar -->

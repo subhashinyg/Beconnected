@@ -1,0 +1,7 @@
+
+<option value="">--Select subcategory--</option>
+{% for data in sub_categories %}                                        
+<option value="{{ data.id }}">{{ data.subcategory_name }}</option>
+{% empty %}
+<option value=""> {{ "No data available" }}</option>  
+{% endfor %}

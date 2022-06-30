@@ -1,0 +1,101 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block page_content %}
+<body class="bg-gradient-light">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/">
+            <img src="{% static 'img/ctb_logo.png' %}" alt="" width="130" style="position: absolute; left: -6%; top: 15%;">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+        <br>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <!--For displaying alert message-->
+                            {% if messages %}
+                                {% for msg in messages %}
+                                    <div class="alert alert-{{ msg.tags }} alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        {{msg.message}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <!--alert message ends-->
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user" action="/registration" method="post" id="registerForm">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <input type="hidden" name="user_id" id="user_id" value="-1">
+                                    <div class="col-sm-12 mb-6 mb-sm-0">
+                                        <select name="role" id="role" class="form-control">
+                                            <option value="" selected disabled>Select User Type</option>
+                                            {% for role in roles %}
+                                            <option value="{{ role.id }}, {{ role.type }}">{{ role.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" id="hospital-select">
+                                    <div class="col-sm-12 mb-6 mb-sm-0">
+                                        <select name="hospital" id="hospital" class="form-control" required>
+                                        <!-- dynamic list-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control" name="first_name" id="fist_name"
+                                            placeholder="First Name">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control" name="last_name" id="last_name"
+                                            placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="Email Address">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control" id="phone" name="phone"
+                                            placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control"
+                                            id="password" name="password" placeholder="Password">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control"
+                                            id="conf_password" name="conf_password" placeholder="Repeat Password">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block" id="submit-btn">
+                                    Register Account
+                                </button>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/login">Already have an account? Login Here</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+{% endblock %}

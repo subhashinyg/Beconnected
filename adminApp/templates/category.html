@@ -1,0 +1,107 @@
+{% extends "common/base.html" %}
+{% load static %}
+{% block page_content %}
+<div id="wrapper">
+    {% include "common/side_bar.html" %}
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            {% include "common/top_bar.html" %}
+            
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Category</h1>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#stateModal">
+                        <i class="fas fa-plus-square text-white-50"></i>Add Category
+                    </a>
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           {% for data in category %}
+                                            <tr>
+                                                <td>{{data.category_name}}</td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-circle btn-sm edit-state" title="Edit"
+                                                        category_id ="{{data.category_name}}"
+                                                        
+                                                    >
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <a href="/delete_category/{{ data.id }}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-danger btn-circle btn-sm" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr> 
+                                            {% empty %}                                           
+                                            <tr>
+                                                <td colspan="2">No data available</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+
+            </div>
+        </div>
+        <!-- End of Main Content -->
+        {% include 'common/footer.html' %}
+
+        </div>
+    <!-- End of Content Wrapper -->
+    </div>
+    <div class="modal fade" id="stateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="form">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add category</h5>
+                    <button class="close btn-cancel" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="/categories" method="post" id="stateForm">
+                {% csrf_token %}
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label for="state">Category Name</label>
+                        <input type="text" name="category" class="form-control" placeholder="Enter category name" id="cat" required>
+                        <input type="hidden" id="id" name="cat_id">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger btn-sm btn-cancel" type="button" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-success btn-sm" id="btn-submit" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- End of Page Wrapper -->
+{% endblock %}
+

@@ -73,10 +73,12 @@ class SubcategoryView(View):
     def get(self, request):
         try:
             template = 'sub_category.html'
+            cat = Category.objects.all().order_by('pk')
             sub_cat = SubCategory.objects.all().order_by('pk')
             menu = 'sub_category'
             return render(request, template, context={
                 'sub_category': sub_cat,
+                'cat':cat,
                 'menu': menu,
             })
         except Exception as e:

@@ -97,7 +97,7 @@
                                             <label for="state_id">Select Category</label>
                                             <select class="form-control" name="categories_id" id="categories_id" required>
                                                 <option value="" selected disabled>-select category-</option>
-                                                {% for data in category %}
+                                                {% for data in cat %}
                                                 <option value="{{ data.id }}">{{ data.category_name }}</option>
                                                 {% endfor %}
                                             </select>

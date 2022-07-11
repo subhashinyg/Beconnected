@@ -87,7 +87,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form id="panchayatForm" action="/add_business" method="post">
+                <form  action="add_business" method="post">
                     {% csrf_token %}
                     <div class="modal-body">
                         <div class="row">
@@ -105,7 +105,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="district_id"> Sub Category</label>
-                                    <select class="form-control" name="subcategory_id" id="sub_categories_id" required>
+                                    <select class="form-control" name="sub_categories_id" id="sub_categories_id" required>
                                                                             
                                     </select>
                                 </div>
@@ -113,7 +113,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="district_id"> Location</label>
-                                    <select class="form-control" name="location_id" id="location_id" required>
+                                    <select class="form-control" name="location" id="location_id" required>
        
                                     </select>
                                 </div>
@@ -123,8 +123,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="location">Business Name</label>
-                                    <input type="text" class="form-control" name="business" id="business" placeholder="Enter business name" required>
-                                    <input type="hidden" name="business_id" id="business_id">
+                                    <input type="text" class="form-control" name="business_name" id="business" placeholder="Enter business name" required>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                                 <div class="form-group">
                                     <label for="location">Description </label>
                                     <input type="text" class="form-control" name="description" id="description" placeholder="Enter description" required>
-                                    <input type="hidden" name="description" id="description">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                                 <div class="form-group">
                                     <label for="location">Address</label>
                                     <input type="text" class="form-control" name="address" id="address" placeholder="Enter address" required>
-                                    <input type="hidden" name="address" id="address">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
                                     <input type="phone" class="form-control" name="phone" id="phone" placeholder="Enter phone" required>
-                                    <input type="hidden" name="phone_id" id="phone_id">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                                 <div class="form-group">
                                     <label for="phone">Landline Number</label>
                                     <input type="phone" class="form-control" name="landline_no" id="landline_no" placeholder="Enter phone" required>
-                                    <input type="hidden" name="landline_no" id="landline_no">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="website">facebook</label>
-                                    <input type="facebook" class="form-control" name="website" id="website" placeholder="Enter website" required>                                    
+                                    <input type="facebook" class="form-control" name="facebook" id="website" placeholder="Enter website" required>                                    
                                 </div>
                             </div>
                         </div>

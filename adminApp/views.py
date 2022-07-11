@@ -164,11 +164,15 @@ class LocationView(View):
 class BusinessView(View):
     def get(self,request):       
         template = 'business_add.html'
-        category = Category.objects.all() 
-        business = BusinessServices.objects.all()        
+        category = Category.objects.all()
+        subcategory =SubCategory.objects.all()
+        business = BusinessServices.objects.all() 
+        location= Locations.objects.all()       
         return render(request, template, context={
             'business': business,
-            'category':category
+            'category':category,
+            'subcategory':subcategory,
+            'location':location
         })
     def post(self, request):
         print('hellooooooooo')
@@ -178,7 +182,7 @@ class BusinessView(View):
             sub_cat = request.POST['sub_categories_id']
             print(sub_cat,'sub_cat')
             location = request.POST['location']
-            print(sub_cat,'sub_cat')
+            print(sub_cat,'location')
             business_name = request.POST['business_name']
             print(business_name,'business_name')
             description = request. POST['description']
@@ -199,9 +203,10 @@ class BusinessView(View):
             print(facebook,'facebook')
             linkedin = request.POST['linkedin']
             print(linkedin,'linkedin')
+            googlemap=request.POST['googlemap']
             print(category, sub_cat, location)
             obj = BusinessServices.objects.create(category_id=category, subcategory_id=sub_cat, location_id=location,name=business_name,description=description,
-            address=address,phone_no=phone,landline_no=landline_no,website=website,instagram=instagram,twitter=twitter,facebook=facebook,linkedin=linkedin )
+            address=address,phone_no=phone,landline_no=landline_no,website=website,instagram=instagram,twitter=twitter,facebook=facebook,linkedin=linkedin ,googlemap=googlemap)
             obj.save()
             message = 'Business added sucessfully'
             messages.add_message(request, messages.SUCCESS, message)

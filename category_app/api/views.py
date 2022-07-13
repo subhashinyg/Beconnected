@@ -164,30 +164,33 @@ class BusinessServicesView(APIView):
 class ShopDescriptionView(APIView):
     def get(self,request, *args, **kwargs):
         try:
-            data=BusinessServices.objects.get(id=request.data['id'])
-            print(data,'/////////////////')
+            cs = BusinessServices.objects.all()
+            serializer = BusinessServiceAddSerializer(cs, many=True)
+            return JsonResponse({"cs": serializer.data}, safe=False, status=status.HTTP_200_OK)
            
-            # serializ= BusinessServicesList(data= data)
-            # serializ.is_valid()
-            return Response({"details":data})
-        except:
-            return Response({"error":"not found"})
-class ShopDescriptionView(APIView):
-    def get(self, request):
-        try:
-            shop_descriptions = BusinessServicesList(data=BusinessServices.objects.filter(id=request.data['id'])
-            )
-            return Response({
-                'hasError': False,
-                'message': 'Success',
-                'response': shop_descriptions
-            }, status=status.HTTP_200_OK)
+#             # serializ= BusinessServicesList(data= data)
+#             # serializ.is_valid()
+#             return Response({"details":data})
         except Exception as e:
-            return Response({
-                'hasError': True,
-                'message': f'Failed: {str(e)}',
-                'response': None
-            }, status=status.HTTP_200_OK)
+            return Response({"error":e})
+
+# class ShopDescriptionView(APIView):
+#     def get(self, request):
+#         try:
+#             #shop_descriptions = BusinessServicesList(data=BusinessServices.objects.filter(id=request.data['id']))
+#             shop_descriptions = BusinessServicesList.objects.all()
+            
+#             return Response({
+#                 'hasError': False,
+#                 'message': 'Success',
+#                 'response': shop_descriptions
+#             }, status=status.HTTP_200_OK)
+#         except Exception as e:
+#             return Response({
+#                 'hasError': True,
+#                 'message': f'Failed: {str(e)}',
+#                 'response': None
+#             }, status=status.HTTP_200_OK)
 
 
 class PrivacyView(APIView):

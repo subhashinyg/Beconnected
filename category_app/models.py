@@ -83,6 +83,7 @@ class BusinessServices(models.Model):
     watsapp = models.CharField(max_length=16, null=True)    
     fax = models.CharField(max_length=16, null=True)
     googlemap = models.CharField(max_length=16, null=True)
+    image= models.ImageField(upload_to='images',blank= True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

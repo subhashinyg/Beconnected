@@ -121,7 +121,7 @@ def getlocation(request):
 class LocationView(View):
     def get(self,request):       
         template = 'locations.html'
-        location = Locations.objects.all().order_by('pk')        
+        location = Locations.objects.all().distinct('location_name')      
         category = Category.objects.all().order_by('pk') 
          
         return render(request, template, context={
@@ -203,10 +203,11 @@ class BusinessView(View):
             print(facebook,'facebook')
             linkedin = request.POST['linkedin']
             print(linkedin,'linkedin')
+            image = request.POST['image']
             googlemap=request.POST['googlemap']
             print(category, sub_cat, location)
             obj = BusinessServices.objects.create(category_id=category, subcategory_id=sub_cat, location_id=location,name=business_name,description=description,
-            address=address,phone_no=phone,landline_no=landline_no,website=website,instagram=instagram,twitter=twitter,facebook=facebook,linkedin=linkedin ,googlemap=googlemap)
+            address=address,phone_no=phone,landline_no=landline_no,website=website,instagram=instagram,twitter=twitter,facebook=facebook,linkedin=linkedin,image=image,googlemap=googlemap)
             obj.save()
             message = 'Business added sucessfully'
             messages.add_message(request, messages.SUCCESS, message)

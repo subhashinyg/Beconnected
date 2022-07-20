@@ -161,36 +161,37 @@ class BusinessServicesView(APIView):
         #         'response': None
         #     }, status=status.HTTP_200_OK)
 
-class ShopDescriptionView(APIView):
-    def get(self,request, *args, **kwargs):
-        try:
-            cs = BusinessServices.objects.all()
-            serializer = BusinessServiceAddSerializer(cs, many=True)
-            return JsonResponse({"cs": serializer.data}, safe=False, status=status.HTTP_200_OK)
-           
-#             # serializ= BusinessServicesList(data= data)
-#             # serializ.is_valid()
-#             return Response({"details":data})
-        except Exception as e:
-            return Response({"error":e})
-
 # class ShopDescriptionView(APIView):
-#     def get(self, request):
+#     def get(self,request, *args, **kwargs):
 #         try:
-#             #shop_descriptions = BusinessServicesList(data=BusinessServices.objects.filter(id=request.data['id']))
-#             shop_descriptions = BusinessServicesList.objects.all()
-            
-#             return Response({
-#                 'hasError': False,
-#                 'message': 'Success',
-#                 'response': shop_descriptions
-#             }, status=status.HTTP_200_OK)
+#             cs = BusinessServices.objects.all()
+#             serializer = BusinessServiceAddSerializer(cs, many=True)
+#             return JsonResponse({"cs": serializer.data}, safe=False, status=status.HTTP_200_OK)
+           
+# #             # serializ= BusinessServicesList(data= data)
+# #             # serializ.is_valid()
+# #             return Response({"details":data})
 #         except Exception as e:
-#             return Response({
-#                 'hasError': True,
-#                 'message': f'Failed: {str(e)}',
-#                 'response': None
-#             }, status=status.HTTP_200_OK)
+#             return Response({"error":e})
+
+class ShopDescriptionView(APIView):
+    def get(self, request):
+        try:
+            shop_descriptions = BusinessServicesList(data=BusinessServices.objects.filter(id=request.data['id']))
+            print(shop_descriptions,'///')
+            #shop_descriptions = BusinessServicesList.objects.all()
+            
+            return Response({
+                'hasError': False,
+                'message': 'Success',
+                'response': shop_descriptions
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({
+                'hasError': True,
+                'message': f'Failed: {str(e)}',
+                'response': None
+            }, status=status.HTTP_200_OK)
 
 
 class PrivacyView(APIView):

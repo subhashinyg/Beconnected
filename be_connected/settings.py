@@ -117,7 +117,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD':'mypassword',
-        'HOST':'database-2.comozwubabru.ap-south-1.rds.amazonaws.com'
+        'HOST':'connected.comozwubabru.ap-south-1.rds.amazonaws.com'
         
     }
 }

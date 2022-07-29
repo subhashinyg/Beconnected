@@ -1,3 +1,5 @@
+from urllib import response
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -51,11 +53,14 @@ def user_registration_view(request):
 
 class UserProfileAPI(APIView):
    def get(self, request):
-
-        users=request.user
-        print(users.email)
-        #results={"users":users}
-        return Response({"User":{"Username":users.full_name,"email":users.email,"phone":users.phone}})
+        users = self.request.user
+        username=users.full_name
+        email=users.email
+        
+        data={'username':username,
+                 'email':email}
+        print(data)
+        return Response(data)
          
 
 from django.contrib.auth.hashers import make_password

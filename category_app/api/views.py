@@ -1,5 +1,6 @@
 from distutils.log import error
 from operator import sub
+from urllib import response
 from django.shortcuts import render
 from category_app.models import *
 from rest_framework.response import Response
@@ -176,22 +177,20 @@ class BusinessServicesView(APIView):
 
 class ShopDescriptionView(APIView):
     def get(self, request):
-        try:
-            shop_descriptions = BusinessServicesList(data=BusinessServices.objects.filter(id=request.data['id']))
-            print(shop_descriptions,'///')
-            #shop_descriptions = BusinessServicesList.objects.all()
+        business = request.data['id']
+        des = BusinessServices.objects.filter(id=business)
+        print(des,'[[[[[[[[[[[[[[[[[[[[[[')
+        shop_descriptions = BusinessServiceAddSerializer(des,many=True)
+        print(shop_descriptions,'///')
+        # data={
+        #     #'serviceId':shop_descriptions.serviceId,
+        #     #'name':shop_descriptions.name,
+        #     'address':shop_descriptions.address,
+        #     'phoneNo':shop_descriptions.phone_no
             
-            return Response({
-                'hasError': False,
-                'message': 'Success',
-                'response': shop_descriptions
-            }, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({
-                'hasError': True,
-                'message': f'Failed: {str(e)}',
-                'response': None
-            }, status=status.HTTP_200_OK)
+        # }
+            #shop_descriptions = BusinessServicesList.objects.all()
+        return Response(shop_descriptions.data)
 
 
 class PrivacyView(APIView):
